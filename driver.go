@@ -1,4 +1,4 @@
-package datantdb
+package dantdb
 
 import (
 	"encoding/json"

@@ -24,7 +24,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/abhinav-TB/datantdb"
+	"github.com/abhinav-TB/dantdb"
 )
 
 type Student struct {
@@ -35,7 +35,7 @@ type Student struct {
 func main() {
 	dir := "./"
 
-	db, err := datantdb.NewDatabase(dir) // creates a new database
+	db, err := dantdb.NewDatabase(dir) // creates a new database
 	if err != nil {
 		fmt.Println("Error", err)
 	}
