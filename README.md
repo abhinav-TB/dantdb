@@ -1,4 +1,4 @@
-# datantDB 
+# dantDB 
 A simple no-SQL database inspired by SQLite . 
 
 
