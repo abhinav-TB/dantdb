@@ -7,8 +7,6 @@ import (
 	"github.com/abhinav-TB/datantdb"
 )
 
-const Version = "1.0.0"
-
 type Address struct {
 	City    string
 	State   string
@@ -51,26 +49,33 @@ func main() {
 		})
 	}
 
-	records, err := db.ReadAll("users")
-	if err != nil {
+	// records, err := db.ReadAll("users")
+	// if err != nil {
+	// 	fmt.Println("Error", err)
+	// }
+	// fmt.Println(records)
+
+	// allusers := []User{}
+
+	// for _, f := range records {
+	// 	employeeFound := User{}
+	// 	if err := json.Unmarshal([]byte(f), &employeeFound); err != nil {
+	// 		fmt.Println("Error", err)
+	// 	}
+	// 	allusers = append(allusers, employeeFound)
+	// }
+	// fmt.Println((allusers))
+
+	// Read single document from the database
+	record := User{}
+	if db.Read("users", "Neo", &record) != nil {
 		fmt.Println("Error", err)
 	}
-	fmt.Println(records)
+	fmt.Println(record)
 
-	allusers := []User{}
-
-	for _, f := range records {
-		employeeFound := User{}
-		if err := json.Unmarshal([]byte(f), &employeeFound); err != nil {
-			fmt.Println("Error", err)
-		}
-		allusers = append(allusers, employeeFound)
-	}
-	fmt.Println((allusers))
-
-	if err := db.Delete("users", "John"); err != nil {
-		fmt.Println("Error", err)
-	}
+	// if err := db.Delete("users", "John"); err != nil {
+	// 	fmt.Println("Error", err)
+	// }
 
 	// if err := db.Delete("users", ""); err != nil {
 	// 	fmt.Println("Error", err)
