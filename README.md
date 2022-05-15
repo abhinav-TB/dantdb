@@ -52,6 +52,8 @@ func main() {
 
 }
 ```
+More examples can be found in the [examples](https://github.com/abhinav-TB/datantdb/tree/master/examples) directory
+
 ## Contribute
 
 Contributions are what makes the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
