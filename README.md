@@ -1,5 +1,5 @@
 # datantDB 
-A no-SQL database inspired inspired by SQLite . 
+A simple no-SQL database inspired inspired by SQLite . 
 
 
 ## Features
