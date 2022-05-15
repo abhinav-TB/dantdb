@@ -5,6 +5,7 @@ A simple no-SQL database inspired by SQLite .
 ## Features
 - Easy to Install as a library
 - Easy to use
+- Easy to visualize using JSON
 - safe DB access through mutex's
 - ACID compliant 
 
