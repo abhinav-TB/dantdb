@@ -13,7 +13,7 @@ A simple no-SQL database inspired by SQLite .
 ## Installation
 
  ```sh
- go get github.com/abhinav-TB/datantdb
+ go get github.com/abhinav-TB/dantdb
  ```
 
 ## Usage
