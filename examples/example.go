@@ -55,7 +55,7 @@ func main() {
 		fmt.Println("Error", err)
 	}
 
-	if err := db.Delete("students", ""); err != nil { // delete mulltiple documents
+	if err := db.Delete("students", ""); err != nil { // delete all documents
 		fmt.Println("Error", err)
 	}
 }
