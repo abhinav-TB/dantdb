@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/abhinav-TB/dantdb"
@@ -14,20 +15,47 @@ type Student struct {
 func main() {
 	dir := "./"
 
-	db, err := dantdb.NewDatabase(dir) // creates a new database
+	db, err := dantdb.NewDatabase(dir) // creates new database
 	if err != nil {
 		fmt.Println("Error", err)
 	}
 
-	db.Write("students", "John", Student{ // writes to the database
-		Name:   "John",
-		RollNo: 21,
-	})
+	students := []Student{
+		{"John", 1},
+		{"Paul", 2},
+		{"Robert", 3},
+		{"Vince", 4},
+		{"Neo", 5},
+		{"Albert", 6},
+	}
 
-	record := Student{}
-	if db.Read("students", "John", &record) != nil { // reads from the database
+	for _, value := range students { // write to database
+		db.Write("students", value.Name, Student{
+			Name:   value.Name,
+			RollNo: value.RollNo,
+		})
+	}
+
+	records, err := db.ReadAll("students") // read all records from database
+	if err != nil {
 		fmt.Println("Error", err)
 	}
-	fmt.Println(record)
 
+	allusers := []Student{}
+
+	for _, f := range records {
+		var student Student
+		json.Unmarshal([]byte(f), &student)
+		allusers = append(allusers, student)
+	}
+
+	fmt.Println(allusers)
+
+	if err := db.Delete("students", "John"); err != nil { // delete a single document
+		fmt.Println("Error", err)
+	}
+
+	if err := db.Delete("students", ""); err != nil { // delete mulltiple documents
+		fmt.Println("Error", err)
+	}
 }
