@@ -8,14 +8,13 @@ import (
 	"github.com/abhinav-TB/dantdb"
 )
 
-
 type Student struct {
 	Name   string
 	RollNo int
 }
 
 func main() {
-	dir := "./gos"
+	dir := "./"
 
 	db, err := dantdb.New(dir) // creates new database
 	if err != nil {
