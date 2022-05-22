@@ -2,16 +2,10 @@ package dantdb
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-)
-
-var (
-	ErrNoCollection = errors.New("missing collection")
-	ErrNoResource   = errors.New("missing resource")
 )
 
 func (d *Driver) Read(collection, resource string, v any) error {

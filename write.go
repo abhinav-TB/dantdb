@@ -7,11 +7,6 @@ import (
 	"path/filepath"
 )
 
-const (
-	extension = ".json"
-	temp      = ".tmp"
-)
-
 func (d *Driver) Write(collection, resource string, v any) error {
 	if collection == "" {
 		return ErrNoCollection
@@ -40,15 +35,9 @@ func (d *Driver) Write(collection, resource string, v any) error {
 
 	dir = filepath.Join(dir, resource+extension)
 
-	// b = append(b, byte('\n'))
-	err = os.WriteFile(dir+temp, b, 0600)
+	err = os.WriteFile(dir, b, 0600)
 	if err != nil {
 		return fmt.Errorf("write file: %w", err)
-	}
-
-	err = os.Rename(dir+temp, dir)
-	if err != nil {
-		return fmt.Errorf("rename dir: %w", err)
 	}
 
 	return nil

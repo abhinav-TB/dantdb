@@ -9,6 +9,15 @@ import (
 	"sync"
 )
 
+const (
+	extension = ".json"
+)
+
+var (
+	ErrNoCollection = errors.New("missing collection")
+	ErrNoResource   = errors.New("missing resource")
+)
+
 type Driver struct {
 	mutex   sync.RWMutex
 	mutexes map[string]*sync.Mutex
