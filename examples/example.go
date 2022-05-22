@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 
 	"github.com/abhinav-TB/dantdb"
 )
@@ -15,9 +16,9 @@ type Student struct {
 func main() {
 	dir := "./"
 
-	db, err := dantdb.NewDatabase(dir) // creates new database
+	db, err := dantdb.New(dir) // creates new database
 	if err != nil {
-		fmt.Println("Error", err)
+		log.Fatalln(err)
 	}
 
 	students := []Student{
@@ -38,7 +39,7 @@ func main() {
 
 	records, err := db.ReadAll("students") // read all records from database
 	if err != nil {
-		fmt.Println("Error", err)
+		log.Fatalln(err)
 	}
 
 	allusers := []Student{}
@@ -51,11 +52,13 @@ func main() {
 
 	fmt.Println(allusers)
 
-	if err := db.Delete("students", "John"); err != nil { // delete a single document
-		fmt.Println("Error", err)
+	err = db.DeleteResource("students", "John")
+	if err != nil { // delete a single document
+		log.Fatalln(err)
 	}
 
-	if err := db.Delete("students", ""); err != nil { // delete all documents
-		fmt.Println("Error", err)
+	err = db.DeleteCollection("students")
+	if err != nil { // delete all documents
+		log.Fatalln(err)
 	}
 }
