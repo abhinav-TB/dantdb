@@ -24,6 +24,11 @@ func (d *Driver) Read(collection, resource string, v any) error {
 		return ErrNoResource
 	}
 
+	mutex := d.getMutex(collection)
+
+	mutex.Lock()
+	defer mutex.Unlock()
+
 	record := filepath.Join(d.dir, collection, resource)
 
 	b, err := os.ReadFile(record + ".json")
@@ -39,6 +44,11 @@ func (d *Driver) ReadAll(collection string) ([]string, error) {
 	if collection == "" {
 		return nil, ErrNoCollection
 	}
+
+	mutex := d.getMutex(collection)
+
+	mutex.Lock()
+	defer mutex.Unlock()
 
 	dir := filepath.Join(d.dir, collection)
 
