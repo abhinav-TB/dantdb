@@ -16,7 +16,11 @@ func (d *Driver) DeleteResource(collection, resource string) error {
 
 	dir := filepath.Join(d.dir, path)
 
-	return os.Remove(dir)
+	if err := os.Remove(dir); err != nil {
+		return fmt.Errorf("remove file: %w", err)
+	}
+
+	return nil
 }
 
 func (d *Driver) DeleteCollection(collection string) error {
