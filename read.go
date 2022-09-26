@@ -18,14 +18,13 @@ func (d *Driver) Read(collection, resource string, v any) error {
 		return ErrNoResource
 	}
 
-	mutex := d.getMutex(collection)
-
-	mutex.Lock()
-	defer mutex.Unlock()
-
 	record := filepath.Join(d.dir, collection, resource)
 
+	mutex := d.getMutex(collection)
+	mutex.Lock()
 	b, err := os.ReadFile(record + ".json")
+	mutex.Unlock()
+
 	if err != nil {
 		return fmt.Errorf("read file: %w", err)
 	}
