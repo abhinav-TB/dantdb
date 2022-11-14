@@ -37,20 +37,36 @@ func main() {
 		})
 	}
 
+	filter := []string{"Paul", "Robert", "Albert"} // read filtered records from database
+	filtered, err := db.ReadFiltered("students", filter)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	filteredUsers := []Student{}
+
+	for _, f := range filtered {
+		var student Student
+		json.Unmarshal([]byte(f), &student)
+		filteredUsers = append(filteredUsers, student)
+	}
+
+	fmt.Printf("Filtered %d of expected %d students: %v\n", len(filteredUsers), len(filter), filteredUsers)
+
 	records, err := db.ReadAll("students") // read all records from database
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	allusers := []Student{}
+	allUsers := []Student{}
 
 	for _, f := range records {
 		var student Student
 		json.Unmarshal([]byte(f), &student)
-		allusers = append(allusers, student)
+		allUsers = append(allUsers, student)
 	}
 
-	fmt.Println(allusers)
+	fmt.Printf("All users: %v\n", allUsers)
 
 	err = db.DeleteResource("students", "John")
 	if err != nil { // delete a single document
